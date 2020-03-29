@@ -20,7 +20,7 @@ Pre-built images are available on [Docker Hub](https://hub.docker.com/u/sk4labs)
 To build the images locally, just navigate to the root of the repository and run:
 
 ```shell
-make
+make build
 ```
 
 ## Usage
