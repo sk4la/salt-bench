@@ -45,4 +45,4 @@ make down
 
 ## Issues
 
-In case you spot a mistake or encounter an issue, please file a [ticket](https://github.com/sk4la/salt-bench).
+In case you spot a mistake or encounter an issue, please file a [ticket](https://github.com/sk4la/salt-bench/issues).
