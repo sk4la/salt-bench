@@ -18,7 +18,6 @@ PYGIT2_VERSION?=1.0.3
 
 SALT_PASSWORD?=salt
 SALT_USER?=salt
-SALT_USER_IDENTIFIER?=1001
 SALT_VERSION?=3000
 
 define HELP_MENU
@@ -48,7 +47,6 @@ build:
 		--build-arg PYGIT2_VERSION=$(PYGIT2_VERSION)                         \
 		--build-arg SALT_PASSWORD=$(SALT_PASSWORD)                           \
 		--build-arg SALT_USER=$(SALT_USER)                                   \
-		--build-arg SALT_USER_IDENTIFIER=$(SALT_USER_IDENTIFIER)             \
 		--build-arg SALT_VERSION=$(SALT_VERSION)                             \
 		--file $(DOCKER_DOCKERFILE)                                          \
 		--rm                                                                 \
