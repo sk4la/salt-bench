@@ -16,7 +16,7 @@ services:
     labels:
       com.github.sk4la.maintainer: sk4la <sk4la.box@gmail.com>
       com.github.sk4la.uri: https://github.com/sk4la/salt-bench
-      com.github.sk4la.tracker: yes
+      com.github.sk4la.tracker: true
       com.github.sk4la.version: 2020.1a
     networks:
       - sk4labs
@@ -35,7 +35,7 @@ services:
     labels:
       com.github.sk4la.maintainer: sk4la <sk4la.box@gmail.com>
       com.github.sk4la.uri: https://github.com/sk4la/salt-bench
-      com.github.sk4la.tracker: yes
+      com.github.sk4la.tracker: true
       com.github.sk4la.version: 2020.1a
     networks:
       - sk4labs
