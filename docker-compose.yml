@@ -1,0 +1,42 @@
+version: "3.7"
+
+networks:
+  sk4labs:
+    driver: bridge
+    name: sk4labs
+
+services:
+  salt:
+    environment:
+      DOCKER_COMPOSE_PROJECT: ${DOCKER_COMPOSE_PROJECT:-sk4labs}
+      DOCKER_COMPOSE_SCALE_COUNT: ${DOCKER_COMPOSE_SCALE_COUNT:-1}
+      SALT_USER: ${SALT_USER:-salt}
+    hostname: salt
+    image: sk4labs/salt:alpine
+    labels:
+      com.github.sk4la.maintainer: sk4la <sk4la.box@gmail.com>
+      com.github.sk4la.uri: https://github.com/sk4la/salt-bench
+      com.github.sk4la.tracker: yes
+      com.github.sk4la.version: 2020.1a
+    networks:
+      - sk4labs
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        consistency: consistent
+        source: ./srv
+        target: /srv
+
+  dummy:
+    expose:
+      - 22
+    hostname: dummy
+    image: sk4labs/dummy:ubuntu
+    labels:
+      com.github.sk4la.maintainer: sk4la <sk4la.box@gmail.com>
+      com.github.sk4la.uri: https://github.com/sk4la/salt-bench
+      com.github.sk4la.tracker: yes
+      com.github.sk4la.version: 2020.1a
+    networks:
+      - sk4labs
+    restart: unless-stopped

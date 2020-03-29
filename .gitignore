@@ -1,0 +1,11 @@
+.DS_Store
+.localized
+
+.vscode/
+
+*.env
+*.old
+*.tar.gz
+*$py.class
+
+!kickstart.env

@@ -1,0 +1,17 @@
+#!/usr/bin/env ash
+
+function generate_ssh_keys {
+    ssh-keygen -b 4096 -f /home/${SALT_USER}/.ssh/id_rsa -N "" -t rsa -q
+}
+
+function deploy_ssh_keys {
+    ssh-copy-id -f ${SALT_USER:-salt}@$1
+}
+
+if [[ -n "/home/${SALT_USER}/.ssh/id_rsa" ]] || [[ -n "/home/${SALT_USER}/.ssh/id_rsa.pub" ]]; then
+    generate_ssh_keys
+
+    for index in $(seq 1 ${DOCKER_COMPOSE_SCALE_COUNT:-1}); do
+        deploy_ssh_keys ${DOCKER_COMPOSE_PROJECT:-sk4labs}_dummy_$index
+    done
+fi
