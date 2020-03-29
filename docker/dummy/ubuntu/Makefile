@@ -14,8 +14,9 @@ ifndef DOCKER_BINARY
 	$(error Docker is required to build and/or use this image)
 endif
 
-SALT_USER?=salt
 SALT_PASSWORD?=salt
+SALT_USER?=salt
+SALT_USER_IDENTIFIER?=1001
 
 define HELP_MENU
 Usage: make [<env> ...] <target> [<target> ...]
@@ -43,6 +44,7 @@ build:
 	$(DOCKER_BINARY) build                                                   \
 		--build-arg SALT_USER=$(SALT_USER)                                   \
 		--build-arg SALT_PASSWORD=$(SALT_PASSWORD)                           \
+		--build-arg SALT_USER_IDENTIFIER=$(SALT_USER_IDENTIFIER)             \
 		--file $(DOCKER_DOCKERFILE)                                          \
 		--rm                                                                 \
 		--tag $(DOCKER_REPOSITORY)/$(DOCKER_RESOURCE):$(DOCKER_RESOURCE_TAG) \

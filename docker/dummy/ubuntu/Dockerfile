@@ -1,7 +1,8 @@
 FROM ubuntu:bionic
 
-ARG SALT_USER=salt
 ARG SALT_PASSWORD=salt
+ARG SALT_USER=salt
+ARG SALT_USER_IDENTIFIER=1001
 
 LABEL com.github.sk4la.maintainer="sk4la <sk4la.box@gmail.com>"
 LABEL com.github.sk4la.tag="sk4labs/dummy:ubuntu"
@@ -23,12 +24,13 @@ RUN apt-get update                   && \
 RUN adduser                                            \
         --disabled-password                            \
         --gecos "${SALT_USER},,,,,"                    \
+        --uid ${SALT_USER_IDENTIFIER}                  \
         ${SALT_USER}                                && \
     touch /home/${SALT_USER}/.hushlogin             && \
     echo "${SALT_USER}:${SALT_PASSWORD}" | chpasswd && \
     echo "${SALT_USER} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-COPY --chown=root:root             \
+COPY --chown=0:0                   \
         assets/etc/ssh/sshd_config \
         /etc/ssh/sshd_config
 

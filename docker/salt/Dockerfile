@@ -4,6 +4,7 @@ ARG PYGIT2_VERSION=1.0.3
 
 ARG SALT_PASSWORD=salt
 ARG SALT_USER=salt
+ARG SALT_USER_IDENTIFIER=1001
 ARG SALT_VERSION=3000
 
 LABEL com.github.sk4la.maintainer="sk4la <sk4la.box@gmail.com>"
@@ -45,20 +46,31 @@ RUN python -m pip install --no-cache-dir --upgrade \
 
 RUN apk --purge del .build
 
-RUN addgroup -g 1000 -S sudo                                                    && \
-    addgroup -g 1001 -S ${SALT_USER}                                            && \
-    adduser -s /bin/ash -SD -g "${SALT_USER},,,,," -G ${SALT_USER} ${SALT_USER} && \
-    touch /home/${SALT_USER}/.hushlogin                                         && \
-    echo "${SALT_USER}:${SALT_PASSWORD}" | chpasswd                             && \
-    addgroup ${SALT_USER} sudo                                                  && \
+RUN addgroup                                           \
+        -g 1000                                        \
+        -S sudo                                     && \
+    addgroup                                           \
+        -g ${SALT_USER_IDENTIFIER}                     \
+        -S ${SALT_USER}                             && \
+    adduser                                            \
+        -D                                             \
+        -g "${SALT_USER},,,,,"                         \
+        -G ${SALT_USER}                                \
+        -s /bin/ash                                    \
+        -S                                             \
+        -u ${SALT_USER_IDENTIFIER}                     \
+        ${SALT_USER}                                && \
+    touch /home/${SALT_USER}/.hushlogin             && \
+    echo "${SALT_USER}:${SALT_PASSWORD}" | chpasswd && \
+    addgroup ${SALT_USER} sudo                      && \
     sed -ie "s/.*# %sudo.*/%sudo ALL=(ALL) ALL/g" /etc/sudoers
 
-COPY --chown=${SALT_USER}:${SALT_USER}       \
-        assets/etc/salt/master.d/master.conf \
+COPY --chown=${SALT_USER_IDENTIFIER}:${SALT_USER_IDENTIFIER} \
+        assets/etc/salt/master.d/master.conf                 \
         /etc/salt/master.d/master.conf
 
-COPY --chown=${SALT_USER}:${SALT_USER} \
-        assets/etc/salt/roster         \
+COPY --chown=${SALT_USER_IDENTIFIER}:${SALT_USER_IDENTIFIER} \
+        assets/etc/salt/roster                               \
         /etc/salt/roster
 
 COPY --chown=root:root            \
