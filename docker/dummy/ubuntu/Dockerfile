@@ -16,6 +16,7 @@ RUN apt-get update                   && \
         dumb-init                       \
         openssh-server                  \
         python3.7                       \
+        python3-pip                     \
         sudo                         && \
     apt-get autoremove --purge --yes && \
     apt-get clean

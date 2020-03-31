@@ -76,7 +76,7 @@ endef
 .PHONY: all build down help list push scratch ssh up $(TARGETS)
 .SILENT:
 
-all: up
+all: up ssh
 
 build push scratch: $(TARGETS)
 
