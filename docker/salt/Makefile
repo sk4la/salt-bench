@@ -18,7 +18,7 @@ PYGIT2_VERSION?=1.0.3
 
 SALT_PASSWORD?=salt
 SALT_USER?=salt
-SALT_VERSION?=3000
+SALT_VERSION?=3000.1
 
 define HELP_MENU
 Usage: make [<env> ...] <target> [<target> ...]

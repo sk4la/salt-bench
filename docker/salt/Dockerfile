@@ -4,7 +4,7 @@ ARG PYGIT2_VERSION=1.0.3
 
 ARG SALT_PASSWORD=salt
 ARG SALT_USER=salt
-ARG SALT_VERSION=3000
+ARG SALT_VERSION=3000.1
 
 LABEL com.github.sk4la.maintainer="sk4la <sk4la.box@gmail.com>"
 LABEL com.github.sk4la.tag="sk4labs/salt:alpine"

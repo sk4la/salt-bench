@@ -34,7 +34,7 @@ make up
 Then, spawn an interactive shell inside the Salt Master container by issuing:
 
 ```shell
-make ssh
+make shell
 ```
 
 Finally, execute the following command to bring the whole stack down:

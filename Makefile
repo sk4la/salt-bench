@@ -46,7 +46,7 @@ SALT_PASSWORD?=salt
 SALT_USER?=salt
 SALT_ROOT?=/srv
 SALT_SHELL?=ash
-SALT_VERSION?=3000
+SALT_VERSION?=3000.1
 
 export SALT_PASSWORD
 export SALT_USER
@@ -61,7 +61,7 @@ Main targets:
   down         bring the stack down
   help         show this help
   list         list containers in the stack
-  ssh          spawn an interactive shell
+  shell        spawn an interactive shell
   up           bring the stack up
 
 Development targets:
@@ -73,10 +73,10 @@ Development targets:
 Refer to the documentation for use cases and examples.
 endef
 
-.PHONY: all build down help list push scratch ssh up $(TARGETS)
+.PHONY: all build down help list push scratch shell up $(TARGETS)
 .SILENT:
 
-all: up ssh
+all: up shell
 
 build push scratch: $(TARGETS)
 
@@ -95,7 +95,7 @@ help:
 list:
 	$(DOCKER_BINARY) container list --filter label=$(DOCKER_TRACKING_LABEL)
 
-ssh:
+shell:
 	$(DOCKER_BINARY) exec                \
 		--interactive                    \
 		--tty                            \
